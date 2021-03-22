@@ -46,9 +46,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // manageData("UPDATE product SET product_stock = product_stock-$number WHERE product_id = '$id'");
     // manageData("INSERT INTO inventory (inventory_action, inventory_quantity, product_id, inventory_date) VALUES('STOCK-OUT','$number', $id, NOW())");
-
-
-   
+    header("location:sales-inventory.php?view=sales&q=&page=1&detailed=$invoiceID");
    
 }
 
@@ -68,7 +66,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
 
 <div class="header">
-    <h1>Inventory Management System</h1>
+    <h1> Electronics  Inventory Billing System</h1>
     <h2 class="header__time"></h2>
     <a href="logout.php"><h2>Logout</h2></a>
 </div>
@@ -88,10 +86,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             <label>Customer name:</label>
             <input required name="customerName" type="text">
             <br>
-            <label>Customer contact:</lable>
+            <label>Customer contact:</label>
             <input required name="customerContact" type="text">
             <br>
-            <label>Customer address:</lable>
+            <label>Customer address:</label>
             <input required name="customerAddress" type="text">
             <br>
             <label>Products:</label>
@@ -143,7 +141,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             <label>Total Amount:</label>
             <input required id="totalAmount" name="totalAmount" style="background-color: rgba(0,0,0,0.2)" readonly type="number">
             <br>
-            <label>Amount Paid:</lable>
+            <label>Amount Paid:</label>
             <input class="paidAmount" required name="paidAmount" type="number">
             <br>
             <label>Change:</label>

@@ -18,7 +18,7 @@
 <body class="home">
 
     <div class="header">
-        <h1>Inventory Management System</h1>
+        <h2> Electronics  Inventory Billing System</h2>
         <h2 class="header__time"></h2>
         <a href="logout.php"><h2>Logout</h2></a>
     </div>
@@ -59,13 +59,7 @@
                 <p>View sales and recent inventory logs</p>
             </div>  
         </a>
-        <!-- <a href="settings-users.php" class="home__dashboard__tile">
-            <img src="assets/images/users.png">
-            <div class="home__dashboard__tile__description">
-                <h1>My Account Settings & Users</h1>
-                <p>Manage your account settings and users</p>
-            </div>  
-        </a> -->
+
        
     </div>
 

@@ -28,7 +28,15 @@
     <title>Sales & Inventory</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <link rel="stylesheet" href="assets/style.css">
+    <style>
+        @media print {
+            .noprint {
+                display: none;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
     <!--VIEW FULL INVOICE MODAL-->
@@ -43,20 +51,20 @@
                 $itemsGridHTML = "";
                 $itemsGridHTML = "<div style='border-bottom: 1px solid black' class='invoice-products__row'><strong>ProductName</strong><strong>Price</strong><strong>Qty</strong><strong>Total</strong></div>";
                 while($row = mysqli_fetch_array($products)) {
-                    $itemsGridHTML .= "<div style='border-bottom: 1px solid black' class='invoice-products__row'><p>".$row["product_name"]."</p> <p>₱".$row["product_price"]."</p> <p>".$row["quantity"]."</p> <p>₱".($row["product_price"]*$row["quantity"])."</p></div>";
+                    $itemsGridHTML .= "<div style='border-bottom: 1px solid black' class='invoice-products__row'><p>".$row["product_name"]."</p> <p> ₹".$row["product_price"]."</p> <p>".$row["quantity"]."</p> <p> ₹".($row["product_price"]*$row["quantity"])."</p></div>";
                 }
 
                 $invoice = fetchData("SELECT * FROM invoice WHERE invoice_id = '$id'");
                 $row = mysqli_fetch_assoc($invoice);  
 
-                $itemsGridHTML .= "<div style='text-align: right' class='invoice-products__row'><p></p><p></p><p>Total Amount:</p><p style='text-align: center; font-weight: bold'>₱".$row["total_amount"]."</p></div>";
-                $itemsGridHTML .= "<div style='text-align: right' class='invoice-products__row'><p></p><p></p><p>Amount Paid:</p><p style='text-align: center; font-weight: bold; border-bottom: 1px solid black'>₱".$row["amount_paid"]."</p></div>";
-                $itemsGridHTML .= "<div style='text-align: right' class='invoice-products__row'><p></p><p></p><p>Change:</p><p style='text-align: center'>₱".($row["amount_paid"]-$row["total_amount"])."</p></div>";
+                $itemsGridHTML .= "<div style='text-align: right' class='invoice-products__row'><p></p><p></p><p>Total Amount:</p><p style='text-align: center; font-weight: bold'> ₹".$row["total_amount"]."</p></div>";
+                $itemsGridHTML .= "<div style='text-align: right' class='invoice-products__row'><p></p><p></p><p>Amount Paid:</p><p style='text-align: center; font-weight: bold; border-bottom: 1px solid black'> ₹".$row["amount_paid"]."</p></div>";
+                $itemsGridHTML .= "<div style='text-align: right' class='invoice-products__row'><p></p><p></p><p>Change:</p><p style='text-align: center'> ₹".($row["amount_paid"]-$row["total_amount"])."</p></div>";
                
               
 
-                echo "<div class='modal-container modal-invoice show-modal'>".
-                        "<form action='products.php' method='POST' class='modal-container__modal-form modal-edit__form show-modal__form'>".
+                echo "<div class='modal-container modal-invoice show-modal .modal-scrollbar-measure'>".
+                        "<form action='products.php' method='POST' id='invoiceForm' class='modal-container__modal-form modal-edit__form show-modal__form'>".
                             "<h2>Invoice Details</h2>".
                             "<p><strong>Invoice #: </strong>".$row["invoice_id"]."</p>".
                             "<p><strong>Transaction Date: </strong>".date_format(date_create($row["invoice_date"]), 'g:ia \o\n l jS F Y')."</p>".
@@ -68,7 +76,9 @@
                             $itemsGridHTML.
                             "</div>".
                     
-                            "<button type='button' class='modal-cancel-btn' onclick='toggleInvoiceModal()'>Close</button>".
+                            "<button type='button' class='modal-cancel-btn noprint' onclick='toggleInvoiceModal()'>Close</button>".
+                            "<hr>".
+                            "<input type='button' class='modal-cancel-btn noprint' style='background: GREEN;' onclick='window.print()' value = 'Print'>".
                         "</form>".
                     "</div>";
 
@@ -77,7 +87,7 @@
 
 
     <div class="header">
-        <h1>Inventory Management System</h1>
+        <h1> Electronics  Inventory Billing System</h1>
         <h2 class="header__time"></h2>
         <a href="logout.php"><h2>Logout</h2></a>
     </div>
@@ -193,7 +203,7 @@
                                 "<h4>".$row["invoice_id"]."</h4>".
                                 "<h4>".date_format(date_create($row["invoice_date"]), 'g:ia \o\n l jS F Y')."</h4>".
                                 "<h4>".$row["customer_name"]."</h4>".
-                                "<h4>₱".$row["total_amount"]."</h4>".
+                                "<h4> ₹".$row["total_amount"]."</h4>".
                                 "<a class='action-btn update' href='sales-inventory.php?view=".$view."&q=".@$_GET["q"]."&page=".$currentPage."&detailed=".$row["invoice_id"]."'>View Full Invoice</a>".
                             "</div>";
                     }

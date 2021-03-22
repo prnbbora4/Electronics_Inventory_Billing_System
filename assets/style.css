@@ -168,7 +168,7 @@ body {
 *****************************/
 
 .modal-body--open {
-    /* overflow: hidden; */
+     /*overflow: hidden;*/
 }
 
 .modal-container {
@@ -180,6 +180,7 @@ body {
     justify-content: center;
     align-items: center;
     transform: scale(0);
+
 }
 
 .modal-container__modal-form {
@@ -191,7 +192,10 @@ body {
     opacity: 0.5;
     transform: translateY(-10px);
     transition: all 0.3s;
+
 }
+.modal-scrollbar-measure {
+    overflow: hidden !Important; }
 
 .modal-container__modal-form label {
     font-size: 1.2em;
@@ -216,6 +220,7 @@ body {
 }
 .show-modal {
     transform: scale(1);
+
 }
 
 .show-modal__form {

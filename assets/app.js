@@ -11,7 +11,7 @@ var updateTime = (hours, minutes, seconds) => {
     document.querySelector('.header__time').innerHTML = currentTime;
 }
 
-setInterval(tickClock,1000);
+ setInterval(tickClock,1000);
 
 function toggleAddModal() {
    document.querySelector('.modal-add').classList.toggle('show-modal');

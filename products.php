@@ -208,7 +208,7 @@
 
 
     <div class="header">
-        <h1>Inventory Management System</h1>
+        <h1> Electronics  Inventory Billing System</h1>
         <h2 class="header__time"></h2>
         <a href="logout.php"><h2>Logout</h2></a>
     </div>
@@ -269,7 +269,7 @@
                             "<h4>".$row["product_id"]."</h4>".
                             "<h4>".$row["product_barcode"]."</h4>".
                             "<h4>".$row["product_name"]."</h4>".
-                            "<h4>₱".$row["product_price"]."</h4>".
+                            "<h4> ₹".$row["product_price"]."</h4>".
                             "<h4>".$row["product_stock"]."</h4>".
                             "<h4>".$row["category_name"]."</h4>".
                             "<h4>".$row["brand_name"]."</h4>".

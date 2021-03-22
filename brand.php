@@ -79,7 +79,7 @@
     </div>
 
     <div class="header">
-        <h1>Inventory Management System</h1>
+        <h1> Electronics  Inventory Billing System</h1>
         <h2 class="header__time"></h2>
         <a href="logout.php"><h2>Logout</h2></a>
     </div>
