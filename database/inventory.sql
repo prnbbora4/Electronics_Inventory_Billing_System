@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.6deb5
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Jun 03, 2018 at 05:49 PM
--- Server version: 5.7.22-0ubuntu18.04.1
--- PHP Version: 7.2.5-0ubuntu0.18.04.1
+-- Host: 127.0.0.1
+-- Generation Time: Apr 11, 2021 at 04:26 PM
+-- Server version: 10.4.18-MariaDB
+-- PHP Version: 8.0.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -67,7 +68,9 @@ INSERT INTO `brand` (`brand_id`, `brand_name`) VALUES
 (60, 'Logitech'),
 (61, 'SteelSeries'),
 (62, 'ViewSonic'),
-(63, 'Oppo');
+(63, 'Oppo'),
+(64, 'One Plus'),
+(65, 'Unbrand');
 
 -- --------------------------------------------------------
 
@@ -103,7 +106,9 @@ INSERT INTO `category` (`category_id`, `category_name`) VALUES
 (142, 'Projector'),
 (143, 'Networking Materials'),
 (144, 'Uncategorized'),
-(145, 'Furnitures');
+(145, 'Furnitures'),
+(146, 'Mobiles'),
+(147, 'TV');
 
 -- --------------------------------------------------------
 
@@ -124,20 +129,17 @@ CREATE TABLE `inventory` (
 --
 
 INSERT INTO `inventory` (`inventory_id`, `inventory_action`, `inventory_quantity`, `product_id`, `inventory_date`) VALUES
-(109, 'NEW PRODUCT STOCK-IN', 100, 32, '2018-05-10 06:26:44'),
-(110, 'NEW PRODUCT STOCK-IN', 100, 33, '2018-05-10 06:27:18'),
-(111, 'STOCK-OUT', 2, 33, '2018-05-10 06:29:29'),
-(112, 'STOCK-OUT', 2, 32, '2018-05-10 06:29:29'),
-(113, 'NEW PRODUCT STOCK-IN', 50, 34, '2018-05-10 10:04:38'),
-(114, 'STOCK-IN', 50, 34, '2018-05-10 10:05:22'),
-(115, 'STOCK-OUT', 5, 32, '2018-05-10 10:06:55'),
-(116, 'NEW PRODUCT STOCK-IN', 100, 35, '2018-05-10 10:26:50'),
-(117, 'STOCK-IN', 1, 32, '2018-05-10 10:27:52'),
-(118, 'STOCK-OUT', 120, 34, '2018-05-10 10:29:33'),
-(119, 'STOCK-OUT', 100, 33, '2018-05-10 10:35:53'),
-(120, 'NEW PRODUCT STOCK-IN', 120, 36, '2018-05-10 10:41:44'),
-(121, 'STOCK-OUT', 100, 36, '2018-06-02 19:16:19'),
-(122, 'STOCK-OUT', 20, 36, '2018-06-02 19:17:05');
+(1, 'NEW PRODUCT STOCK-IN', 50, 1, '2021-03-20 11:18:08'),
+(2, 'NEW PRODUCT STOCK-IN', 25, 2, '2021-03-20 11:19:05'),
+(3, 'NEW PRODUCT STOCK-IN', 32, 3, '2021-03-20 11:20:30'),
+(4, 'STOCK-OUT', 1, 3, '2021-03-20 11:21:30'),
+(5, 'STOCK-OUT', 1, 1, '2021-03-29 11:41:06'),
+(6, 'STOCK-IN', 1, 1, '2021-03-29 11:41:14'),
+(7, 'STOCK-OUT', 5, 1, '2021-03-29 11:53:39'),
+(8, 'STOCK-OUT', 4, 1, '2021-03-29 12:41:52'),
+(9, 'STOCK-IN', 5, 1, '2021-03-29 12:42:03'),
+(10, 'STOCK-OUT', 10, 2, '2021-03-29 12:46:03'),
+(11, 'STOCK-OUT', 5, 1, '2021-03-29 12:46:03');
 
 -- --------------------------------------------------------
 
@@ -160,11 +162,9 @@ CREATE TABLE `invoice` (
 --
 
 INSERT INTO `invoice` (`invoice_id`, `invoice_date`, `customer_name`, `customer_contact`, `customer_address`, `total_amount`, `amount_paid`) VALUES
-(1, '2018-05-10 06:29:29', 'Mr. Eerol', '12369', 'DWCL', 410000, 410000),
-(2, '2018-05-10 10:06:54', 'Dugay', '69696969', 'dwcl', 600000, 600000),
-(3, '2018-05-10 10:29:33', 'Charles', '123', 'wer', 120000, 120000),
-(4, '2018-05-10 10:35:53', 'fasdf', 'fdsf', 'fsdf', 8500000, 100000000),
-(5, '2018-06-02 19:17:04', 'Charles', '312312321', 'dwcl', 1730200, 10000000);
+(1, '2021-03-20 11:21:30', 'Bego royi', '7845128956', 'Itanagar', 45120, 45120),
+(2, '2021-03-29 11:53:38', 'Tsering Dhondup', '9888124177', 'Tawang', 470000, 500000),
+(3, '2021-03-29 12:46:03', 'Dikruk Raji', '7085525438', 'Itanagar', 1220720, 1300000);
 
 -- --------------------------------------------------------
 
@@ -184,13 +184,10 @@ CREATE TABLE `invoice_product` (
 --
 
 INSERT INTO `invoice_product` (`invoice_product_id`, `invoice_id`, `product_id`, `quantity`) VALUES
-(1, 1, 33, 2),
-(2, 1, 32, 2),
-(3, 2, 32, 5),
-(4, 3, 34, 120),
-(5, 4, 33, 100),
-(6, 4, 36, 100),
-(7, 5, 36, 20);
+(1, 1, 3, 1),
+(2, 2, 1, 5),
+(3, 3, 2, 10),
+(4, 3, 1, 5);
 
 -- --------------------------------------------------------
 
@@ -213,9 +210,9 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`product_id`, `product_barcode`, `product_name`, `product_price`, `product_stock`, `category_id`, `brand_id`) VALUES
-(32, '123123123', 'Macbook Pro 15 inch i7', 120000, 94, 126, 28),
-(35, '3127471', 'Samsung S8', 49500, 100, 144, 51),
-(36, '123123', 'Lenovo Thinkpad X1 Carbon', 86510, 0, 126, 25);
+(1, '1245785689', 'Acer Predator', 94000, 41, 126, 40),
+(2, '1245785690', 'One Plus 8T', 48000, 15, 146, 64),
+(3, '1245785696', 'Samsung LED', 45120, 31, 147, 51);
 
 -- --------------------------------------------------------
 
@@ -237,7 +234,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `first_name`, `middle_name`, `last_name`, `username`, `password`) VALUES
-(1, 'Jonats', NULL, 'Franc', 'admin', '1234');
+(1, 'Bego', NULL, 'Royi', 'admin', '1234');
 
 --
 -- Indexes for dumped tables
@@ -247,7 +244,8 @@ INSERT INTO `user` (`user_id`, `first_name`, `middle_name`, `last_name`, `userna
 -- Indexes for table `brand`
 --
 ALTER TABLE `brand`
-  ADD PRIMARY KEY (`brand_id`);
+  ADD PRIMARY KEY (`brand_id`),
+  ADD KEY `brand_id` (`brand_id`);
 
 --
 -- Indexes for table `category`
@@ -259,26 +257,32 @@ ALTER TABLE `category`
 -- Indexes for table `inventory`
 --
 ALTER TABLE `inventory`
-  ADD PRIMARY KEY (`inventory_id`);
+  ADD PRIMARY KEY (`inventory_id`),
+  ADD KEY `product_id` (`product_id`);
 
 --
 -- Indexes for table `invoice`
 --
 ALTER TABLE `invoice`
-  ADD PRIMARY KEY (`invoice_id`);
+  ADD PRIMARY KEY (`invoice_id`),
+  ADD KEY `invoice_id` (`invoice_id`);
 
 --
 -- Indexes for table `invoice_product`
 --
 ALTER TABLE `invoice_product`
-  ADD PRIMARY KEY (`invoice_product_id`);
+  ADD PRIMARY KEY (`invoice_product_id`),
+  ADD KEY `invoice_id` (`invoice_id`),
+  ADD KEY `product_id` (`product_id`);
 
 --
 -- Indexes for table `product`
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`product_id`),
-  ADD UNIQUE KEY `product_barcode` (`product_barcode`);
+  ADD UNIQUE KEY `product_barcode` (`product_barcode`),
+  ADD KEY `brand_id` (`brand_id`),
+  ADD KEY `product_id` (`product_id`);
 
 --
 -- Indexes for table `user`
@@ -294,37 +298,61 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `brand`
 --
 ALTER TABLE `brand`
-  MODIFY `brand_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `brand_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=146;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=148;
+
 --
 -- AUTO_INCREMENT for table `inventory`
 --
 ALTER TABLE `inventory`
-  MODIFY `inventory_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=123;
+  MODIFY `inventory_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
 --
 -- AUTO_INCREMENT for table `invoice`
 --
 ALTER TABLE `invoice`
-  MODIFY `invoice_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `invoice_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT for table `invoice_product`
 --
 ALTER TABLE `invoice_product`
-  MODIFY `invoice_product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `invoice_product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `invoice_product`
+--
+ALTER TABLE `invoice_product`
+  ADD CONSTRAINT `invoice_product_ibfk_1` FOREIGN KEY (`invoice_id`) REFERENCES `invoice` (`invoice_id`) ON DELETE CASCADE ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `product`
+--
+ALTER TABLE `product`
+  ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`brand_id`) REFERENCES `brand` (`brand_id`) ON DELETE CASCADE ON UPDATE NO ACTION;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
